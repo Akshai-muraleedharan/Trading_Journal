@@ -7,8 +7,8 @@
   "type": "module",
   "main": "server",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
