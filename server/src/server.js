@@ -2,6 +2,7 @@ import app from "./app.js"
 import dotenv from "dotenv"
 import { checkEnv } from "./utils/checkEnv.js"
 import { connectDB } from "./config/db.js"
+import { errorHandler } from "./middleware/errorHandler.js"
 
 dotenv.config()
 
@@ -17,3 +18,4 @@ const startServer = async () => {
 
 startServer()
 
+app.use(errorHandler)
