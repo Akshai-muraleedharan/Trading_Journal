@@ -1,7 +1,7 @@
-
+import dotenv from "dotenv"
+dotenv.config()
 
 export const checkEnv = (envName) => {
-
     const isExist = process.env[envName]
 
     if (!isExist) {

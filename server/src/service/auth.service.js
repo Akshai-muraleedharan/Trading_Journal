@@ -10,8 +10,9 @@ export const createUser = async (userData) => {
         const { userName, email, password } = userData
 
         const user = await User.findOne({ email }).select("_id")
+
         if (user) {
-            throw new AppError("Account Already exist", 409)
+            throw new AppError(JSON.stringify([{ key: "invalid", message: "Account Already exist" }]), 409)
         }
 
 
@@ -39,14 +40,14 @@ export const accountLogin = async (userData) => {
 
 
         if (!user) {
-            throw new AppError("Login failed. Please check your credentials", 401)
+            throw new AppError(JSON.stringify([{ key: "invalid", message: "Login failed. Please check your credentials" }]), 401)
         }
 
 
         const isMatch = await user.comparePassword(password);
 
         if (!isMatch) {
-            throw new AppError("Login failed. Please check your credentials", 401)
+            throw new AppError(JSON.stringify([{ key: "invalid", message: "Login failed. Please check your credentials" }]), 401)
         }
 
         const accessPayload = { _id: user?._id, role: user?.role }

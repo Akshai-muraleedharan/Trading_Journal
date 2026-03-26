@@ -1,6 +1,7 @@
 import { accountLogin, createUser } from "../../service/index.js";
 import { checkEnv } from "../../utils/checkEnv.js";
 import { AppError } from "../../utils/customErrorHandler.js";
+import { joiError } from "../../utils/joiError.js";
 import { userLoginValidation, validateUserRegister } from "./userValidation.js"
 
 export const userRegister = async (req, res, next) => {
@@ -8,8 +9,10 @@ export const userRegister = async (req, res, next) => {
 
         const { error, value } = validateUserRegister.validate(req.body)
 
-        if (error) {
-            return next(new AppError(error.details[0].message, 400))
+        const errorValue = joiError(error);
+
+        if (errorValue) {
+            return next(new AppError(JSON.stringify(errorValue), 400))
         }
 
 
@@ -25,10 +28,15 @@ export const userRegister = async (req, res, next) => {
 export const userLogin = async (req, res, next) => {
     try {
         const { error, value } = userLoginValidation.validate(req.body)
+        const errorValue = joiError(error);
 
-        if (error) {
-            return next(new AppError(error.details[0].message, 400))
+
+
+        if (errorValue) {
+            return next(new AppError(JSON.stringify(errorValue), 400))
         }
+
+
 
 
 
