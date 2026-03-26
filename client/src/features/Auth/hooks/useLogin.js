@@ -3,12 +3,15 @@ import { axiosInstance } from '../../../config/axiosInstance'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useAuthStore } from '../../../store/AuthStore'
 
 export const useLogin = () => {
 
     const [error, setError] = useState([])
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+
+    const { loginAuth } = useAuthStore()
 
     const userLogin = async (userData) => {
         try {
@@ -19,7 +22,9 @@ export const useLogin = () => {
                 data: userData
             })
 
+
             if (response?.data?.success) {
+                loginAuth(response?.data?.data, response?.data?.accessToken)
                 toast.success(response?.data?.message)
             }
 
