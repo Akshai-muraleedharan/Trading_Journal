@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { useLogin } from '../hooks/useLogin'
 
-export const UserLogin = () => {
+const UserLogin = () => {
     const [passwordType, setPasswordType] = useState({
         isPassword: false,
         type: "password"
@@ -68,3 +68,6 @@ export const UserLogin = () => {
         </div>
     )
 }
+
+
+export default UserLogin

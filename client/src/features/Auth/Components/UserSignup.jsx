@@ -7,7 +7,7 @@ import { useSignup } from '../hooks/useSignup'
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 
-export const UserSignup = () => {
+const UserSignup = () => {
 
     const [passwordType, setPasswordType] = useState({
         isPassword: false,
@@ -81,3 +81,6 @@ export const UserSignup = () => {
         </div>
     )
 }
+
+
+export default UserSignup
