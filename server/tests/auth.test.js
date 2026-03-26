@@ -26,6 +26,8 @@ afterAll(async () => {
 
 const userEmail = "akshaimuraleedharan@gmail.com"
 
+
+
 describe("Test server route health", () => {
     test("health", async () => {
         const res = await request(app).get("/api/health")
@@ -34,6 +36,8 @@ describe("Test server route health", () => {
 })
 
 describe("User Auth db test", () => {
+
+
     test("Account Register", async () => {
         const res = await request(app).post("/api/v1/user/register").send({
             userName: "akshai",
@@ -57,4 +61,29 @@ describe("User Auth db test", () => {
         })
         expect(res.statusCode).toBe(409);
     })
+
+    let accessToken = null
+    test("User Login", async () => {
+        await request(app).post("/api/v1/user/register").send({
+            userName: "akshai",
+            email: userEmail,
+            password: "Akshai984"
+        })
+
+        const res = await request(app).post("/api/v1/user/login").send({
+            email: userEmail,
+            password: "Akshai984"
+        })
+
+
+        accessToken = res.body.accessToken
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.accessToken).toBeDefined();
+        expect(res.body).toHaveProperty("accessToken");
+        expect(typeof res.body.accessToken).toBe("string")
+        expect(res.body.data.email).toBe(userEmail)
+        expect(res.headers["set-cookie"]).toBeDefined();
+    })
+
 })

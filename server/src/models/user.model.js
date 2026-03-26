@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     profilePic: {
         type: String,
@@ -25,8 +25,8 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["user", "admin"],
-        default: "user"
+        enum: ["USER", "ADMIN"],
+        default: "USER"
     },
     tradeCapital: {
         type: Number,
@@ -42,7 +42,10 @@ userSchema.pre("save", async function () {
     const salt = await bcryptjs.genSalt(10)
     this.password = await bcryptjs.hash(this.password, salt)
 
-
 })
+
+userSchema.methods.comparePassword = async function (enterdPassword) {
+    return await bcryptjs.compare(enterdPassword, this.password)
+}
 
 export const User = mongoose.model("User", userSchema)

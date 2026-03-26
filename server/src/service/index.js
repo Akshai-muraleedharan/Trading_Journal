@@ -1,1 +1,1 @@
-export { createUser } from "./auth.service.js"
+export { createUser, accountLogin } from "./auth.service.js"
