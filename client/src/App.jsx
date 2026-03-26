@@ -1,15 +1,11 @@
-import { Button, Container, Typography } from "@mui/material"
+import { BrowserRouter } from "react-router-dom"
+import { Router } from "./routes/Router"
+
 
 export const App = () => {
   return (
-    <Container>
-      <Typography>
-        MUI + Vite (JavaScript)
-      </Typography>
-
-      <Button variant="contained" color="primary">
-        Click me
-      </Button>
-    </Container>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   )
 }
