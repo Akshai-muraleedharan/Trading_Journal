@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { axiosInstance } from '../../../config/axiosInstance'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export const useSignup = () => {
 
@@ -17,6 +18,10 @@ export const useSignup = () => {
                 url: "/user/register",
                 data: userData
             })
+
+            if (response?.data?.success) {
+                toast.success(response?.data?.message)
+            }
 
             if (response?.data?.success) {
                 navigate("/")

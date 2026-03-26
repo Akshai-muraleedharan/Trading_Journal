@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { axiosInstance } from '../../../config/axiosInstance'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export const useLogin = () => {
 
@@ -17,6 +18,10 @@ export const useLogin = () => {
                 url: "/user/login",
                 data: userData
             })
+
+            if (response?.data?.success) {
+                toast.success(response?.data?.message)
+            }
 
             if (response?.data?.success) {
                 navigate("/signup")
