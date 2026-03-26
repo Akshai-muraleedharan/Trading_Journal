@@ -1,3 +1,4 @@
+import { createUser } from "../../service/index.js";
 import { AppError } from "../../utils/customErrorHandler.js";
 import { validateUserRegister } from "./userValidation.js"
 
@@ -11,9 +12,9 @@ export const userRegister = async (req, res, next) => {
         }
 
 
-        console.log(value);
+        await createUser(value)
 
-
+        res.status(201).json({ success: true, message: "Account Registered successfully" })
     } catch (error) {
         next(error)
     }

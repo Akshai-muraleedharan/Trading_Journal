@@ -1,4 +1,6 @@
 import mongoose from "mongoose"
+import bcryptjs from "bcryptjs"
+
 
 const userSchema = new mongoose.Schema({
     userName: {
@@ -9,14 +11,17 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true,
+        lowerCase: true
     },
     password: {
         type: String,
         required: true
     },
     profilePic: {
-        type: String
+        type: String,
+        default: null
     },
     role: {
         type: String,
@@ -26,7 +31,18 @@ const userSchema = new mongoose.Schema({
     tradeCapital: {
         type: Number,
         min: 0,
+        default: 0
     }
+}, { timestamps: true })
+
+userSchema.pre("save", async function () {
+    const user = this
+
+    if (!this.isModified('password')) return
+    const salt = await bcryptjs.genSalt(10)
+    this.password = await bcryptjs.hash(this.password, salt)
+
+
 })
 
 export const User = mongoose.model("User", userSchema)

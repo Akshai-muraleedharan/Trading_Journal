@@ -7,6 +7,7 @@
   "type": "module",
   "main": "server",
   "scripts": {
+    "test": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
@@ -20,6 +21,9 @@
     "mongoose": "^9.3.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "cross-env": "^10.1.0",
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
   }
 }

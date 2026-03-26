@@ -5,10 +5,13 @@ const app = express()
 
 app.use(express.json())
 
+
+
+
 app.use("/api", apiRouter)
 
 app.use('/api/health', (req, res) => {
-    res.json({ message: "Server health is OK" })
+    res.status(200).json({ message: "Server health is OK" })
 })
 
 app.use((req, res) => {
