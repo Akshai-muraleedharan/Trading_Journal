@@ -50,10 +50,11 @@ export const accountLogin = async (userData) => {
             throw new AppError(JSON.stringify([{ key: "invalid", message: "Login failed. Please check your credentials" }]), 401)
         }
 
-        const accessPayload = { _id: user?._id, role: user?.role }
+        const tokenPayload = { id: user?._id, role: user?.role }
 
-        const accessToken = generateAccessToken(accessPayload)
-        const refreshToken = generateRefreshToken(accessPayload)
+
+        const accessToken = generateAccessToken(tokenPayload)
+        const refreshToken = generateRefreshToken(tokenPayload)
 
 
 
