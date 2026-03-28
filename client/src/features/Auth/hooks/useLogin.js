@@ -29,7 +29,7 @@ export const useLogin = () => {
             }
 
             if (response?.data?.success) {
-                navigate("/signup")
+                navigate("/dashboard")
             }
 
         } catch (error) {

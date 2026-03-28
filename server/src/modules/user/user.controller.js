@@ -40,7 +40,7 @@ export const userLogin = async (req, res, next) => {
 
 
 
-        const payload = { ...value, role: "USER" }
+        const payload = { ...value }
 
         const { rest, accessToken, refreshToken } = await accountLogin(payload)
 

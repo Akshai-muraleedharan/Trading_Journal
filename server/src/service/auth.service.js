@@ -34,9 +34,9 @@ export const createUser = async (userData) => {
 
 export const accountLogin = async (userData) => {
     try {
-        const { email, password, role } = userData
+        const { email, password } = userData
 
-        const user = await User.findOne({ email: email, role: role }).select("email userName password role")
+        const user = await User.findOne({ email: email }).select("email userName password role")
 
 
         if (!user) {
