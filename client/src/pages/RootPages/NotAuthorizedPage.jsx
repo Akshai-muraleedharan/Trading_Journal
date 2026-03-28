@@ -1,12 +1,12 @@
 import React from 'react'
 import { Navigate, replace, useNavigate } from 'react-router-dom'
 
-export const NotAuthorizedPage = () => {
+const NotAuthorizedPage = () => {
 
     const navigate = useNavigate()
 
     const handleBackToPage = () => {
-        navigate("/", replace)
+        navigate(-1)
     }
 
     return (
@@ -17,7 +17,10 @@ export const NotAuthorizedPage = () => {
                     You don’t have permission to access this page.
                 </p>
             </div>
-            <button onClick={handleBackToPage} className='btn btn-neutral btn-sm mt-5'>Back to Login</button>
+            <button onClick={handleBackToPage} className='btn btn-neutral btn-sm mt-5'>Back to page</button>
         </div>
     )
 }
+
+
+export default NotAuthorizedPage

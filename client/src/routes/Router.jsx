@@ -6,14 +6,14 @@ import { JournalDashBorad } from '../pages/AuthPages/JournalDashBorad'
 import { AuthLayout } from '../layout/AuthLayout'
 import { ProtectedRoute } from './ProtectedRoutes/ProtectedRoute'
 import { userRole } from '../constants/userRoles'
-import { NotAuthorizedPage } from '../pages/RootPages/NotAuthorizedPage'
-import { NotAuthorizedLayout } from '../layout/NotAuthorizedLayout'
 // import { NotAuthorizedPage } from '../pages/RootPages/NotAuthorizedPage'
+import { GuestLayout } from '../layout/GuestLayout'
+
 
 const LoginPage = lazy(() => import("../pages/RootPages/LoginPage"))
 const SignupPage = lazy(() => import("../pages/RootPages/SignupPage"))
 
-// const NotAuthorizedPage = lazy(() => import("../pages/RootPages/NotAuthorizedPage"))
+const NotAuthorizedPage = lazy(() => import("../pages/RootPages/NotAuthorizedPage"))
 
 export const Router = () => {
     return (
@@ -26,7 +26,7 @@ export const Router = () => {
                     <Route path='/signup' element={<SignupPage />} />
                 </Route>
 
-                <Route element={<NotAuthorizedLayout />}>
+                <Route element={<GuestLayout />}>
                     <Route path='/403' element={<NotAuthorizedPage />} />
                 </Route>
 
