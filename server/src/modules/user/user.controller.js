@@ -77,3 +77,19 @@ export const getNewAccessToken = async (req, res, next) => {
         next(error)
     }
 }
+
+export const logOutAccount = async (req, res, next) => {
+    try {
+        console.log("hitted")
+        const isDevEnv = checkEnv("NODE_ENV")
+
+        res.clearCookie("refreshToken", {
+            httpOnly: true,
+            secure: isDevEnv === "PRODUCTION",
+            sameSite: "strict",
+        }).status(200).json({ success: true, message: "Logged out successfully" });
+
+    } catch (error) {
+        next(error)
+    }
+}

@@ -68,7 +68,8 @@ describe("journal", () => {
             timeFrame: "5m",
             notes: "Breakout above resistance level",
             strategy: "INTRADAY",
-            isProfit: "PROFIT"
+            isProfit: "PROFIT",
+            mode: "FOREX"
         })
 
         expect(res.statusCode).toBe(201)

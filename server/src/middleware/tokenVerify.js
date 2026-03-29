@@ -11,6 +11,8 @@ export const verifyToken = async (req, res, next) => {
 
         const authHeader = req.headers.authorization
 
+        console.log("authHeader", authHeader);
+
 
         if (!authHeader || authHeader === undefined || !authHeader.startsWith("Bearer")) {
             throw new AppError("Unauthorized", 401)
@@ -19,17 +21,17 @@ export const verifyToken = async (req, res, next) => {
         const token = authHeader.split(" ")[1];
 
         const decodeToken = jwt.verify(token, checkEnv("ACCESS_TOKEN"))
-        console.log(decodeToken);
+
 
         const user = await User.findOne({ _id: decodeToken.id, role: decodeToken.role }).select("_id userName role")
 
-        console.log(user);
+
 
         if (!user) {
             throw new AppError("Unauthorized", 401)
         }
 
-        console.log("authHeader", authHeader);
+
         req.user = user
 
         next()

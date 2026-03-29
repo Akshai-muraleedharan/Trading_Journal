@@ -8,6 +8,7 @@ import { ProtectedRoute } from './ProtectedRoutes/ProtectedRoute'
 import { userRole } from '../constants/userRoles'
 // import { NotAuthorizedPage } from '../pages/RootPages/NotAuthorizedPage'
 import { GuestLayout } from '../layout/GuestLayout'
+import ProfilePage from '../pages/AuthPages/ProfilePage'
 
 
 const LoginPage = lazy(() => import("../pages/RootPages/LoginPage"))
@@ -33,6 +34,7 @@ export const Router = () => {
                 <Route element={<ProtectedRoute role={[userRole.ADMIN, userRole.USER]} />}>
                     <Route path='/dashboard' element={<AuthLayout />}>
                         <Route index={true} element={<JournalDashBorad />} />
+                        <Route path='user/profile' element={<ProfilePage />} />
                     </Route>
                 </Route>
             </Routes>

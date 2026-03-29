@@ -87,14 +87,14 @@ describe("User Auth db test", () => {
 
     })
 
-    // test("Account already exist", async () => {
-    //     const res = await request(app).post("/api/v1/user/register").send({
-    //         userName: "akshai",
-    //         email: userEmail,
-    //         password: "Akshai984"
-    //     })
-    //     expect(res.statusCode).toBe(409);
-    // })
+    test("Account logout", async () => {
+        const res = await request(app).post("/api/v1/user/logout").set("Authorization", `Bearer ${token}`)
+
+        expect(res.statusCode).toBe(200)
+        // expect(res.body.message).toBe("Logged out successfully")
+
+    })
+
 
 })
 

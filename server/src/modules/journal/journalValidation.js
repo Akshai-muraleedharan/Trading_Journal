@@ -29,6 +29,14 @@ export const journalCreateValidation = Joi.object({
         "number.base": "PnL must be a valid number",
         "any.required": "PnL value is required"
     }),
+    mode: Joi.string()
+        .valid("FOREX", "INDIAN_STOCK")
+        .required()
+        .messages({
+            "any.only": "Mode must be either FOREX or INDIAN_STOCK",
+            "any.required": "Mode is required",
+            "string.base": "Mode must be a valid string"
+        }),
 
     duration: Joi.string().pattern(/^([0-1]\d|2[0-3]):([0-5]\d)$/).required().messages({
         "string.pattern.base": "Duration must be in HH:mm format",

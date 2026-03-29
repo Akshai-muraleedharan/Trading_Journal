@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-
+import { trades } from "../seed/journalSeed.js"
 
 const journalSchema = new mongoose.Schema({
 
@@ -40,6 +40,11 @@ const journalSchema = new mongoose.Schema({
         enum: ["PROFIT", "LOSS"],
         default: "PROFIT"
     },
+    mode: {
+        type: String,
+        enum: ["FOREX", "INDIAN_STOCK"],
+        required: true
+    },
     notes: {
         type: String,
         required: true
@@ -61,4 +66,16 @@ const journalSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 
+
+
+
 export const Journal = mongoose.model("Journal", journalSchema)
+
+
+const uploadData = async () => {
+    await Journal.insertMany(trades)
+    console.log("upload successfully");
+
+}
+
+// uploadData()
