@@ -2,12 +2,18 @@ import { BrowserRouter } from "react-router-dom"
 import { Router } from "./routes/Router"
 import { ToastContainer } from "react-toastify"
 import { ScrollToTop } from "./shared/Common/ScrollToTop"
-import { UseAuthReload } from "./hook/AuthReload/useAuthReload"
+import { useAuthReload } from "./hook/useAuthReload"
+import { LoaderUi } from "./shared/Common/LoaderUi"
 
 export const App = () => {
+  const loading = useAuthReload()
+  console.log(loading);
+
+  if (loading) return <LoaderUi />
+
+
   return (
     <>
-      <UseAuthReload />
       <BrowserRouter>
         <ScrollToTop />
         <ToastContainer

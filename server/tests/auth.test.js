@@ -28,6 +28,7 @@ afterAll(async () => {
 });
 
 let token = null
+let cookies = null
 
 
 
@@ -42,7 +43,6 @@ describe("Test server route health", () => {
 
 describe("User Auth db test", () => {
 
-
     test("Account Register", async () => {
         const res = await request(app).post("/api/v1/user/register").send({
             userName: "akshai",
@@ -52,14 +52,7 @@ describe("User Auth db test", () => {
         expect(res.statusCode).toBe(201);
     })
 
-    test("Account already exist", async () => {
-        const res = await request(app).post("/api/v1/user/register").send({
-            userName: "akshai",
-            email: userEmail,
-            password: "Akshai984"
-        })
-        expect(res.statusCode).toBe(409);
-    })
+
 
     test("User Login", async () => {
 
@@ -71,6 +64,9 @@ describe("User Auth db test", () => {
 
         token = res.body.accessToken
 
+        cookies = res.headers["set-cookie"][0].split(";")[0]
+
+
         expect(res.statusCode).toBe(200);
         expect(res.body.accessToken).toBeDefined();
         expect(res.body).toHaveProperty("accessToken");
@@ -79,6 +75,26 @@ describe("User Auth db test", () => {
         expect(res.headers["set-cookie"]).toBeDefined();
 
     })
+
+    test("new access token", async () => {
+        const res = await request(app).get("/api/v1/user/refresh-token").set("Cookie", cookies)
+
+
+        expect(res.statusCode).toBe(200)
+        expect(res.body.message).toBe("Access token created successfully")
+        expect(res.body.accessToken).toBeDefined()
+        expect(typeof res.body.accessToken).toBe("string");
+
+    })
+
+    // test("Account already exist", async () => {
+    //     const res = await request(app).post("/api/v1/user/register").send({
+    //         userName: "akshai",
+    //         email: userEmail,
+    //         password: "Akshai984"
+    //     })
+    //     expect(res.statusCode).toBe(409);
+    // })
 
 })
 

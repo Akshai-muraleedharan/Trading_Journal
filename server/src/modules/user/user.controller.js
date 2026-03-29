@@ -1,3 +1,4 @@
+import { generateNewAccessToken } from "../../service/common.service.js";
 import { accountLogin, createUser } from "../../service/index.js";
 import { checkEnv } from "../../utils/checkEnv.js";
 import { AppError } from "../../utils/customErrorHandler.js";
@@ -58,6 +59,21 @@ export const userLogin = async (req, res, next) => {
     } catch (error) {
         console.log(error);
 
+        next(error)
+    }
+}
+
+export const getNewAccessToken = async (req, res, next) => {
+    try {
+        const user = req.refreshToken
+        console.log("hitted");
+
+        const { userData, accessToken } = await generateNewAccessToken(user)
+        console.log(userData);
+
+        res.status(200).json({ success: true, message: "Access token created successfully", data: userData, accessToken })
+
+    } catch (error) {
         next(error)
     }
 }
