@@ -7,7 +7,7 @@ export const AuthLayout = () => {
         <div className='bg-[#BBC9C4]'>
 
             <AuthUserHeader />
-            <div className='p-5 lg:px-16 min-h-screen  flex flex-col lg:flex-row items-start justify-center '>
+            <div className='p-5 lg:px-16 min-h-screen  flex flex-col  items-start justify-start '>
                 <Outlet />
             </div>
         </div>

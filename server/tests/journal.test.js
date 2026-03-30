@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { connectDB } from "../src/config/db.js";
 
+
 dotenv.config({ path: ".env.test", override: true });
 
 
@@ -77,4 +78,19 @@ describe("journal", () => {
         expect(res.body.message).toBe("Journal create successfully")
 
     })
+
+
+    test("fetch journals", async () => {
+        const res = await request(app).get("/api/v1/journal").set("Authorization", `Bearer ${token}`)
+        console.log(typeof res.body.success);
+
+        expect(res.statusCode).toBe(200)
+        expect(res.body.success).toBeDefined()
+        expect(res.body.success).toBe(true)
+        expect(typeof res.body.success).toBe("boolean")
+        expect(res.body.message).toBe("Data fetched successfully")
+
+
+    })
+
 })
